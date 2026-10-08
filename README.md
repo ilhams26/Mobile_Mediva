@@ -1,12 +1,16 @@
-# Mediva — Smart Medicine Platform
+# kinara_pharma
 
-Platform digital untuk pengelolaan dan transaksi obat, dilengkapi AI Assistant untuk informasi obat berbahasa natural dan Smart Product Recommendation. Dikembangkan sebagai Project 3, lanjutan dari Kinara Pharma (Project 2).
+A new Flutter project.
 
-## Fitur Utama
+## Getting Started
 
-**Core System:** autentikasi, katalog obat, kategori, batch & inventory (FEFO), cart, checkout, order, resep, pembayaran (Midtrans Sandbox), notifikasi, laporan, web admin/staff.
+This project is a starting point for a Flutter application.
 
-## Status Proyek
+A few resources to get you started if this is your first Flutter project:
 
-Academic project — Project 3, mata kuliah Rekayasa Perangkat Lunak.
-( SEDANG DALAM PENGEMBANGAN )
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
