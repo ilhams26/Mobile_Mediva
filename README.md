@@ -1,16 +1,8 @@
-# kinara_pharma
+# Mediva - Smart Medicine Platform 
 
-A new Flutter project.
+Platform penjualan obat cerdas dengan fitur bantuan pengobatan berbasis AI dan rekomendasi produk yang cerdas
 
-## Getting Started
+## Aplikasi Mobile Flutter terintegrasi dengan web Mediva
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Status Proyek
+( SEDANG DALAM PENGEMBANGAN )
