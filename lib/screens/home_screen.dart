@@ -4,6 +4,7 @@ import '../models/medicine.dart';
 import '../services/api_service.dart';
 import '../services/cart_service.dart';
 import '../utils/currency_formatter.dart';
+import '../widgets/ai_chat_bottom_sheet.dart';
 import 'cart_screen.dart';
 import 'notification_screen.dart';
 import 'obat_detail_screen.dart';
@@ -23,6 +24,39 @@ class _HomeScreenState extends State<HomeScreen> {
   String? currentSearch;
   int? currentKategoriId;
   String namaUser = "Pengguna";
+
+  // Persistent Chat State
+  final List<Map<String, String>> _chatHistory = [
+    {
+      'sender': 'ai',
+      'message':
+          'Halo! Saya Mediva AI 🤖. Ada keluhan penyakit atau ingin mencari obat apa hari ini?',
+    }
+  ];
+
+  void _showChatSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return AiChatBottomSheet(
+          chatHistory: _chatHistory,
+          onSendMessage: (text) {
+            setState(() {
+              _chatHistory.add({'sender': 'user', 'message': text});
+              // Simulasi balasan (Nantinya diganti dengan API hit ke Laravel)
+              _chatHistory.add({
+                'sender': 'ai',
+                'message':
+                    'Hmm, saya sedang belajar memproses pertanyaan "$text". Silakan tunggu backend selesai dibuat ya!',
+              });
+            });
+          },
+        );
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -129,6 +163,76 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefixIcon: Icon(Icons.search, color: colorScheme.primary),
                 ),
               ),
+              const SizedBox(height: 25),
+              const Text(
+                "Rekomendasi Untukmu",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              // Dummy Horizontal List for Recommendation
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: medicines.length > 3 ? 3 : medicines.length,
+                  itemBuilder: (context, index) {
+                    final obat = medicines[index]; // Sementara ambil dari medicines
+                    final imageUrl = "${ApiService.storageUrl}/${obat.foto}";
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ObatDetailScreen(obat: obat),
+                        ),
+                      ),
+                      child: Container(
+                        width: 140,
+                        margin: const EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          color: colorScheme.surface,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: colorScheme.primary.withOpacity(0.5)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                                child: Image.network(
+                                  imageUrl,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) => const Icon(Icons.medication, color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    obat.nama,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Rp ${formatRupiah(obat.harga)}",
+                                    style: TextStyle(color: colorScheme.primary, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
               const SizedBox(height: 25),
               const Text(
                 "Kategori",
@@ -318,6 +422,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
             ],
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showChatSheet,
+        backgroundColor: colorScheme.primary,
+        child: const Text(
+          "🤖",
+          style: TextStyle(fontSize: 24),
         ),
       ),
     );

@@ -9,19 +9,15 @@ import '../models/notification_item.dart';
 import '../models/user_profile.dart';
 import 'http_client.dart';
 
-/// Service terpusat untuk semua pemanggilan API Mediva.
-///
-/// Semua method menggunakan [HttpClient] sebagai wrapper HTTP
-/// sehingga token dan header ditangani secara otomatis.
 class ApiService {
   ApiService._();
 
-  /// URL storage untuk akses file gambar dari Laravel.
+  // URL storage untuk akses file gambar dari Laravel.
   static String get storageUrl => ApiConfig.storageUrl;
 
-  // ── Auth ──────────────────────────────────────────────────────────────
+  // Auth 
 
-  /// Login buyer dan simpan token jika berhasil.
+  // Login buyer dan simpan token jika berhasil.
   static Future<LoginResult> loginPembeli(String phone, String password) async {
     try {
       final response = await HttpClient.post(
@@ -90,7 +86,7 @@ class ApiService {
     }
   }
 
-  // ── OTP & Password ────────────────────────────────────────────────────
+  // OTP & Password 
 
   /// Kirim OTP ke nomor HP yang terdaftar.
   static Future<bool> requestOtp(String phone) async {
@@ -143,7 +139,7 @@ class ApiService {
     }
   }
 
-  // ── Profile ───────────────────────────────────────────────────────────
+  // Profile 
 
   /// Ambil data profil user yang sedang login.
   static Future<UserProfile?> getProfile() async {

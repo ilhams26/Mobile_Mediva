@@ -37,9 +37,7 @@ class HttpClient {
     bool authenticated = true,
     bool jsonContent = false,
   }) async {
-    final headers = <String, String>{
-      'Accept': 'application/json',
-    };
+    final headers = <String, String>{'Accept': 'application/json'};
 
     if (jsonContent) {
       headers['Content-Type'] = 'application/json';
@@ -55,8 +53,6 @@ class HttpClient {
     return headers;
   }
 
-  /// HTTP GET request.
-  ///
   /// [endpoint] path relatif terhadap baseUrl (contoh: `/me`, `/obats`).
   /// [authenticated] jika `true`, token JWT akan disertakan.
   /// [queryParams] parameter query opsional.
@@ -65,9 +61,9 @@ class HttpClient {
     bool authenticated = true,
     Map<String, String>? queryParams,
   }) async {
-    final uri = Uri.parse('${ApiConfig.baseUrl}$endpoint').replace(
-      queryParameters: queryParams,
-    );
+    final uri = Uri.parse(
+      '${ApiConfig.baseUrl}$endpoint',
+    ).replace(queryParameters: queryParams);
     final headers = await _buildHeaders(authenticated: authenticated);
     return http.get(uri, headers: headers);
   }

@@ -7,13 +7,11 @@ import '../config/api_config.dart';
 import '../models/cart_item.dart';
 import '../models/medicine.dart';
 
-/// Service untuk mengelola keranjang belanja di penyimpanan lokal.
-///
-/// Data keranjang disimpan sebagai JSON string list di SharedPreferences.
+// Service untuk mengelola keranjang belanja di penyimpanan lokal.
 class CartService {
   CartService._();
 
-  /// Tambah obat ke keranjang. Jika sudah ada, qty bertambah 1.
+  // Tambah obat ke keranjang. Jika sudah ada, qty bertambah 1.
   static Future<void> addToCart(Medicine medicine) async {
     final items = await getCart();
 
@@ -37,13 +35,13 @@ class CartService {
     await saveCart(items);
   }
 
-  /// Tambah obat ke keranjang dari data mentah (untuk kompatibilitas notifikasi).
+  // Tambah obat ke keranjang dari data mentah
   static Future<void> addToCartFromRaw(Map<String, dynamic> obat) async {
     final medicine = Medicine.fromJson(obat);
     await addToCart(medicine);
   }
 
-  /// Ambil semua item dari keranjang.
+  // Ambil semua item dari keranjang.
   static Future<List<CartItem>> getCart() async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> cartStringList =
@@ -62,7 +60,7 @@ class CartService {
     return items;
   }
 
-  /// Simpan list cart items ke penyimpanan lokal.
+  // Simpan cart items ke penyimpanan lokal.
   static Future<void> saveCart(List<CartItem> items) async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> encoded =
@@ -70,14 +68,14 @@ class CartService {
     await prefs.setStringList(ApiConfig.cartKey, encoded);
   }
 
-  /// Hapus item tertentu berdasarkan ID dari keranjang.
+  // Hapus item tertentu berdasarkan ID
   static Future<void> removeItems(List<int> ids) async {
     final items = await getCart();
     items.removeWhere((item) => ids.contains(item.id));
     await saveCart(items);
   }
 
-  /// Kosongkan seluruh keranjang.
+  /// Kosongkan keranjang
   static Future<void> clearCart() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(ApiConfig.cartKey);

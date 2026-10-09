@@ -1,4 +1,4 @@
-/// Model item keranjang yang disimpan secara lokal di SharedPreferences.
+// Model item keranjang yang disimpan secara lokal di SharedPreferences.
 class CartItem {
   final int id;
   final String nama;
@@ -42,9 +42,6 @@ class CartItem {
 
   /// Konversi ke format yang diharapkan Laravel saat checkout.
   Map<String, dynamic> toCheckoutPayload() {
-    return {
-      'obat_id': id,
-      'qty': qty,
-    };
+    return {'obat_id': id, 'qty': qty};
   }
 }
