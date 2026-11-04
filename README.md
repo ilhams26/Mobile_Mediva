@@ -1,8 +1,8 @@
 # Mediva - Smart Medicine Platform
 
-Platform penjualan obat cerdas dengan fitur bantuan pengobatan berbasis AI dan rekomendasi produk yang cerdas
+Platform penjualan dan pengelolaan obat cerdas dengan fitur bantuan pengobatan berbasis AI dan rekomendasi produk yang cerdas
 
-## Aplikasi Mobile Flutter terintegrasi dengan web Mediva
+# Aplikasi Mobile Flutter terintegrasi dengan web Mediva
 
 ## Fitur
 
@@ -12,4 +12,4 @@ Platform penjualan obat cerdas dengan fitur bantuan pengobatan berbasis AI dan r
 
 ## Tech Stack
 
-Flutter (Dart) · REST API Laravel
+Flutter (dart) · REST API Laravel
